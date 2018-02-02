@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="layout">
+<head>
+	<meta charset="UTF-8" />
+	<title>Insert title here</title>
+</head>
+<body>
+	<nav layout:fragment="header" aria-label="breadcrumb" role="navigation">
+	  <ol class="breadcrumb">
+	    <li class="breadcrumb-item"><a href="#" th:href="@{/reviews/list}">Reviews</a></li>
+	    <li class="breadcrumb-item active" aria-current="page">Novo Review</li>
+	  </ol>
+	</nav>
+
+	<div layout:fragment="content" class="container">
+	
+		<form id="livroForm" th:action="@{/reviews/(form)}" method="post" th:object="${review}" action="#" >
+		
+				<input type="hidden"  th:field="*{id}" />
+				
+			<div class="form-group row">
+				<label for="staticTitulo" class="col-sm-2 col-form-label">Avaliação</label>
+				<div class="col-sm-10">
+					<input type="text" th:field="*{avaliacao}"  class="form-control-plaintext" id="staticTitulo" />
+	      			<span  th:if="${#fields.hasErrors('avaliacao')}" th:errors="*{avaliacao}">Avaliação Error</span>
+	    		</div>
+	    		</div>
+	    			
+	    		<div class="form-group row">
+	    		<label for="staticPaginas" class="col-sm-2 col-form-label">Comentários</label>
+				<div class="col-sm-10">
+	      			<input type="text" th:field="*{comentario}" class="form-control-plaintext" id="staticPaginas" />
+	      			<span  th:if="${#fields.hasErrors('comentario')}" th:errors="*{comentario}">Comentários Error</span>
+	    		</div>
+	    		</div>
+	    		
+	    		<div class="form-group row">
+	    			<label for="staticLivro" class="col-sm-2 col-form-label">Livro</label>
+				<div class="col-sm-10">
+				    <select th:field="*{livro}">
+					  	<option th:each="livro : ${livros}"  th:value="${livro.id}" th:text="${livro.nome}">Livro</option>
+					</select>
+			    </div>
+			</div>
+	    			
+    			<button type="submit" class="btn btn-primary">gravar</button>
+			
+		</form>
+	</div>
+	
+</body>
+</html>
