@@ -6,4 +6,6 @@ import br.biblioteca.livros.beans.Emprestimo;
 
 public interface EmprestimoRepository extends JpaRepository <Emprestimo, Long> {
 
+	Emprestimo findById(Long i);
+
 }
